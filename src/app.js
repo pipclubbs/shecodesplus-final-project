@@ -28,15 +28,6 @@ let currentDayTime = document.querySelector("#current-day-and-time");
 
 currentDayTime.innerHTML = addDayTime(now);
 
-function titleCase(str) {
-  str = str.toLowerCase().split(" ");
-  for (var i = 0; i < str.length; i++) {
-    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
-  }
-  return str.join(" ");
-}
-//note: titleCase function is from freecodecamp.org
-
 //current weather functions
 function currentWeather(response) {
   let temperature = Math.round(response.data.main.temp);
@@ -69,14 +60,13 @@ function cityInput(event) {
   let city = document.querySelector("#city-search");
   let searchedCity = document.querySelector("#searched-city");
 
-  searchedCity.innerHTML = titleCase(city.value);
-
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let currentPositionUrl = `${apiUrl}&q=${city.value}&appid=${apiKey}&units=${units}`;
 
   axios.get(currentPositionUrl).then(currentWeather);
+  axios.get(currentPositionUrl).then(cityName);
   city.value = "";
 }
 
@@ -84,27 +74,25 @@ let searchCity = document.querySelector("#search-form");
 searchCity.addEventListener("submit", cityInput);
 
 //functionality for the current location button
-function localTemp(response) {
-  let currentPosition = response.data.locality;
-  let currentCity = document.querySelector("#searched-city");
-  currentCity.innerHTML = currentPosition;
+function cityName(response) {
+  console.log(response.data.name);
+  let city = response.data.name;
+  let searchedCity = document.querySelector("#searched-city");
 
-  let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
-  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
-  let units = "metric";
-  let currentPositionUrl = `${apiUrl}&q=${currentPosition}&appid=${apiKey}&units=${units}`;
-
-  axios.get(currentPositionUrl).then(currentWeather);
+  searchedCity.innerHTML = city;
 }
 
 function currentPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
-  let apiUrl =
-    "https://api.bigdatacloud.net/data/reverse-geocode-client?&localityLanguage=en";
-  let fullApiUrl = `${apiUrl}&latitude=${lat}&longitude=${lon}`;
+  let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
+  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
+  let units = "metric";
+  let currentPositionUrl = `${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+  console.log(currentPositionUrl);
 
-  axios.get(fullApiUrl).then(localTemp);
+  axios.get(currentPositionUrl).then(currentWeather);
+  axios.get(currentPositionUrl).then(cityName);
 }
 
 function currentGeoLoc(event) {
