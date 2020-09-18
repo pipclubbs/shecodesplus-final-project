@@ -105,18 +105,35 @@ currentLocLink.addEventListener("click", currentGeoLoc);
 //functionality for reset button
 function resetHome(event) {
   let city = "London";
+  let displayCity = document.querySelector("#searched-city");
+  displayCity.innerHTML = city;
+
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
 
   axios.get(homeUrl).then(currentWeather);
-  let displayCity = document.querySelector("#searched-city");
-  displayCity.innerHTML = city;
 }
 
 let resetLink = document.querySelector("#reset");
 resetLink.addEventListener("click", resetHome);
+
+//location at page load
+function pageLoadLoc() {
+  let city = "London";
+  let displayCity = document.querySelector("#searched-city");
+  displayCity.innerHTML = city;
+
+  let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
+  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
+  let units = "metric";
+  let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
+
+  axios.get(homeUrl).then(currentWeather);
+}
+
+pageLoadLoc();
 
 //celsius and farenheit temperature
 function celsiusTemp(event) {
