@@ -147,12 +147,6 @@ pageLoadLoc();
 
 //five-day forecast
 function fiveDayForecast(response) {
-  let dayOneDayText = document.querySelector("#dayOneDay");
-  let dayTwoDayText = document.querySelector("#dayTwoDay");
-  let dayThreeDayText = document.querySelector("#dayThreeDay");
-  let dayFourDayText = document.querySelector("#dayFourDay");
-  let dayFiveDayText = document.querySelector("#dayFiveDay");
-
   let dayOneTemp = document.querySelector("#dayOneTemp");
   dayOneTemp.innerHTML = `${Math.round(response.data.daily[1].temp.day)}ºC`;
   let dayTwoTemp = document.querySelector("#dayTwoTemp");
@@ -164,21 +158,30 @@ function fiveDayForecast(response) {
   let dayFiveTemp = document.querySelector("#dayFiveTemp");
   dayFiveTemp.innerHTML = `${Math.round(response.data.daily[5].temp.day)}ºC`;
 
-  if (now.getDay() < 6) {
-    dayOneDay = now.getDay() + 1;
-    dayTwoDay = now.getDay() + 2;
-    dayThreeDay = now.getDay() + 3;
-    dayFourDay = now.getDay() + 4;
-    dayFiveDay = now.getDay() + 5;
-  } else {
-    dayOneTemp = now.getDay() - 6;
-    dayTwoTemp = now.getDay() - 6;
-    dayThreeTemp = now.getDay() - 6;
-    dayFourTemp = now.getDay() - 6;
-    dayFiveTemp = now.getDay() - 6;
+  let dayOneDay = now.getDay() + 1;
+  if (dayOneDay > 6) {
+    dayOneDay = now.getDay() - 6;
   }
 
-  console.log(dayOneDay);
+  let dayTwoDay = now.getDay() + 2;
+  if (dayTwoDay > 6) {
+    dayTwoDay = now.getDay() - 5;
+  }
+
+  let dayThreeDay = now.getDay() + 3;
+  if (dayThreeDay > 6) {
+    dayThreeDay = now.getDay() - 4;
+  }
+
+  let dayFourDay = now.getDay() + 4;
+  if (dayFourDay > 6) {
+    dayFourDay = now.getDay() - 3;
+  }
+
+  let dayFiveDay = now.getDay() + 5;
+  if (dayFiveDay > 6) {
+    dayFiveDay = now.getDay() - 2;
+  }
 
   let days = [
     "Sunday",
@@ -190,14 +193,23 @@ function fiveDayForecast(response) {
     "Saturday",
   ];
 
+  let dayOneDayText = document.querySelector("#dayOneDay");
   let dayOne = days[dayOneDay];
   dayOneDayText.innerHTML = dayOne;
+
+  let dayTwoDayText = document.querySelector("#dayTwoDay");
   let dayTwo = days[dayTwoDay];
   dayTwoDayText.innerHTML = dayTwo;
+
+  let dayThreeDayText = document.querySelector("#dayThreeDay");
   let dayThree = days[dayThreeDay];
   dayThreeDayText.innerHTML = dayThree;
+
+  let dayFourDayText = document.querySelector("#dayFourDay");
   let dayFour = days[dayFourDay];
   dayFourDayText.innerHTML = dayFour;
+
+  let dayFiveDayText = document.querySelector("#dayFiveDay");
   let dayFive = days[dayFiveDay];
   dayFiveDayText.innerHTML = dayFive;
 }
