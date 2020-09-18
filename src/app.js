@@ -58,7 +58,6 @@ function currentWeather(response) {
 function cityInput(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
-  let searchedCity = document.querySelector("#searched-city");
 
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
@@ -73,7 +72,7 @@ function cityInput(event) {
 let searchCity = document.querySelector("#search-form");
 searchCity.addEventListener("submit", cityInput);
 
-//functionality for the current location button
+//functionality for the current location link
 function cityName(response) {
   console.log(response.data.name);
   let city = response.data.name;
@@ -102,6 +101,22 @@ function currentGeoLoc(event) {
 
 let currentLocLink = document.querySelector("#current-loc");
 currentLocLink.addEventListener("click", currentGeoLoc);
+
+//functionality for reset button
+function resetHome(event) {
+  let city = "London";
+  let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
+  let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
+  let units = "metric";
+  let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
+
+  axios.get(homeUrl).then(currentWeather);
+  let displayCity = document.querySelector("#searched-city");
+  displayCity.innerHTML = city;
+}
+
+let resetLink = document.querySelector("#reset");
+resetLink.addEventListener("click", resetHome);
 
 //celsius and farenheit temperature
 function celsiusTemp(event) {
