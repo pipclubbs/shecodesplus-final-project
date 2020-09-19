@@ -121,8 +121,8 @@ function resetHome(event) {
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
-  let lon = 51.51;
-  let lat = -0.13;
+  let lat = 51.51;
+  let lon = -0.13;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
@@ -143,8 +143,8 @@ function pageLoadLoc() {
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
-  let lon = 51.51;
-  let lat = -0.13;
+  let lat = 51.51;
+  let lon = -0.13;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
