@@ -161,6 +161,8 @@ pageLoadLoc();
 
 //five-day forecast
 function fiveDayForecast(response) {
+  console.log(response);
+  console.log(response.data.daily[1].weather[0].icon);
   let dayOneTemp = document.querySelector("#dayOneTemp");
   dayOneTemp.innerHTML = `${Math.round(response.data.daily[1].temp.day)}ºC`;
   let dayTwoTemp = document.querySelector("#dayTwoTemp");
@@ -210,6 +212,27 @@ function fiveDayForecast(response) {
   let dayFiveDayText = document.querySelector("#dayFiveDay");
   let dayFive = days[dayFiveDay];
   dayFiveDayText.innerHTML = dayFive;
+
+  let dayOneIcon = response.data.daily[1].weather[0].icon;
+  let currentDayOneIconUrl = `http://openweathermap.org/img/wn/${dayOneIcon}@2x.png`;
+  let dayOneIconImport = document.querySelector("#dayOneIcon");
+  dayOneIconImport.src = `${currentDayOneIconUrl}`;
+  let dayTwoIcon = response.data.daily[2].weather[0].icon;
+  let currentDayTwoIconUrl = `http://openweathermap.org/img/wn/${dayTwoIcon}@2x.png`;
+  let dayTwoIconImport = document.querySelector("#dayTwoIcon");
+  dayTwoIconImport.src = `${currentDayTwoIconUrl}`;
+  let dayThreeIcon = response.data.daily[3].weather[0].icon;
+  let currentDayThreeIconUrl = `http://openweathermap.org/img/wn/${dayThreeIcon}@2x.png`;
+  let dayThreeIconImport = document.querySelector("#dayThreeIcon");
+  dayThreeIconImport.src = `${currentDayThreeIconUrl}`;
+  let dayFourIcon = response.data.daily[4].weather[0].icon;
+  let currentDayFourIconUrl = `http://openweathermap.org/img/wn/${dayFourIcon}@2x.png`;
+  let dayFourIconImport = document.querySelector("#dayFourIcon");
+  dayFourIconImport.src = `${currentDayFourIconUrl}`;
+  let dayFiveIcon = response.data.daily[5].weather[0].icon;
+  let currentDayFiveIconUrl = `http://openweathermap.org/img/wn/${dayFiveIcon}@2x.png`;
+  let dayFiveIconImport = document.querySelector("#dayFiveIcon");
+  dayFiveIconImport.src = `${currentDayFiveIconUrl}`;
 }
 
 //celsius and farenheit temperature
