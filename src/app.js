@@ -74,11 +74,18 @@ searchCity.addEventListener("submit", cityInput);
 
 //functionality for the current location link
 function cityName(response) {
-  //console.log(response.data.name);
   let city = response.data.name;
   let searchedCity = document.querySelector("#searched-city");
-
   searchedCity.innerHTML = city;
+
+  let lat = response.data.coord.lat;
+  let lon = response.data.coord.lon;
+  let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
+  let units = "metric";
+  let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
+  let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+
+  axios.get(fiveDayUrl).then(fiveDayForecast);
 }
 
 function currentPosition(position) {
@@ -88,14 +95,11 @@ function currentPosition(position) {
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let currentPositionUrl = `${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-  //console.log(currentPositionUrl);
-
-  axios.get(currentPositionUrl).then(currentWeather);
-  axios.get(currentPositionUrl).then(cityName);
-
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
+  axios.get(currentPositionUrl).then(currentWeather);
+  axios.get(currentPositionUrl).then(cityName);
   axios.get(fiveDayUrl).then(fiveDayForecast);
 }
 
@@ -117,8 +121,13 @@ function resetHome(event) {
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
+  let lon = 51.51;
+  let lat = -0.13;
+  let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
+  let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
   axios.get(homeUrl).then(currentWeather);
+  axios.get(fiveDayUrl).then(fiveDayForecast);
 }
 
 let resetLink = document.querySelector("#reset");
@@ -134,13 +143,13 @@ function pageLoadLoc() {
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let units = "metric";
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
+  let lon = 51.51;
+  let lat = -0.13;
+  let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
+  let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
   axios.get(homeUrl).then(currentWeather);
-
-  //let apiFiveUrl = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-  //let homeFiveUrl = `${apiFiveUrl}q=${city}&cnt=6&appid=${apiKey}`;
-
-  //  axios.get(homeFiveUrl).then(fiveDayForecast);
+  axios.get(fiveDayUrl).then(fiveDayForecast);
 }
 
 pageLoadLoc();
@@ -162,64 +171,41 @@ function fiveDayForecast(response) {
   if (dayOneDay > 6) {
     dayOneDay = now.getDay() - 6;
   }
-
   let dayTwoDay = now.getDay() + 2;
   if (dayTwoDay > 6) {
     dayTwoDay = now.getDay() - 5;
   }
-
   let dayThreeDay = now.getDay() + 3;
   if (dayThreeDay > 6) {
     dayThreeDay = now.getDay() - 4;
   }
-
   let dayFourDay = now.getDay() + 4;
   if (dayFourDay > 6) {
     dayFourDay = now.getDay() - 3;
   }
-
   let dayFiveDay = now.getDay() + 5;
   if (dayFiveDay > 6) {
     dayFiveDay = now.getDay() - 2;
   }
 
-  let days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   let dayOneDayText = document.querySelector("#dayOneDay");
   let dayOne = days[dayOneDay];
   dayOneDayText.innerHTML = dayOne;
-
   let dayTwoDayText = document.querySelector("#dayTwoDay");
   let dayTwo = days[dayTwoDay];
   dayTwoDayText.innerHTML = dayTwo;
-
   let dayThreeDayText = document.querySelector("#dayThreeDay");
   let dayThree = days[dayThreeDay];
   dayThreeDayText.innerHTML = dayThree;
-
   let dayFourDayText = document.querySelector("#dayFourDay");
   let dayFour = days[dayFourDay];
   dayFourDayText.innerHTML = dayFour;
-
   let dayFiveDayText = document.querySelector("#dayFiveDay");
   let dayFive = days[dayFiveDay];
   dayFiveDayText.innerHTML = dayFive;
 }
-
-//let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
-//let apiUrl = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-//let units = "metric";
-//let city = "london";
-//let homeUrl = `${apiUrl}q=${city}&cnt=6&appid=${apiKey}`;
-//axios.get(homeUrl).then(fiveDayForecast);
 
 //celsius and farenheit temperature
 function celsiusTemp(event) {
