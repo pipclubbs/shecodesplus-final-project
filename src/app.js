@@ -53,6 +53,11 @@ function currentWeather(response) {
   let windSpeed = response.data.wind.speed;
   let currentWindSpeed = document.querySelector("#wind-speed");
   currentWindSpeed.innerHTML = `${windSpeed}m/s`;
+
+  let icon = response.data.weather[0].icon;
+  let currentIconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  let currentIcon = document.querySelector("#current-weather-icon");
+  currentIcon.src = `${currentIconUrl}`;
 }
 
 function cityInput(event) {
