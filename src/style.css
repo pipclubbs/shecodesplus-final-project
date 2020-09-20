@@ -118,3 +118,8 @@ a:hover {
   padding-top: 5px;
   padding-bottom: 5px;
 }
+
+.inactive {
+  pointer-events: none;
+  color: #1d2d50;
+}

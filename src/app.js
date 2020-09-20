@@ -36,15 +36,15 @@ function currentWeather(response) {
 
   let feelsLike = Math.round(response.data.main.feels_like);
   let currentFeelsLike = document.querySelector("#feels-like");
-  currentFeelsLike.innerHTML = `${feelsLike}ºC`;
+  currentFeelsLike.innerHTML = `${feelsLike}`;
 
   let highTemp = Math.round(response.data.main.temp_max);
   let currentHighTemp = document.querySelector("#high-temp");
-  currentHighTemp.innerHTML = `${highTemp}ºC`;
+  currentHighTemp.innerHTML = `${highTemp}`;
 
   let lowTemp = Math.round(response.data.main.temp_min);
   let currentLowTemp = document.querySelector("#low-temp");
-  currentLowTemp.innerHTML = `${lowTemp}ºC`;
+  currentLowTemp.innerHTML = `${lowTemp}`;
 
   let humidity = response.data.main.humidity;
   let currentHumidity = document.querySelector("#humidity");
@@ -66,7 +66,12 @@ function cityInput(event) {
 
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
-  let units = "metric";
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
   let currentPositionUrl = `${apiUrl}&q=${city.value}&appid=${apiKey}&units=${units}`;
 
   axios.get(currentPositionUrl).then(currentWeather);
@@ -86,7 +91,12 @@ function cityName(response) {
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
-  let units = "metric";
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
 
@@ -98,7 +108,12 @@ function currentPosition(position) {
   let lon = position.coords.longitude;
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
-  let units = "metric";
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
   let currentPositionUrl = `${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
@@ -124,7 +139,12 @@ function resetHome(event) {
 
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
-  let units = "metric";
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
   let lat = 51.51;
   let lon = -0.13;
@@ -146,7 +166,12 @@ function pageLoadLoc() {
 
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
-  let units = "metric";
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    units = "imperial";
+  } else {
+    units = "metric";
+  }
   let homeUrl = `${apiUrl}&q=${city}&appid=${apiKey}&units=${units}`;
   let lat = 51.51;
   let lon = -0.13;
@@ -161,18 +186,16 @@ pageLoadLoc();
 
 //five-day forecast
 function fiveDayForecast(response) {
-  console.log(response);
-  console.log(response.data.daily[1].weather[0].icon);
   let dayOneTemp = document.querySelector("#dayOneTemp");
-  dayOneTemp.innerHTML = `${Math.round(response.data.daily[1].temp.day)}ºC`;
+  dayOneTemp.innerHTML = `${Math.round(response.data.daily[1].temp.day)}`;
   let dayTwoTemp = document.querySelector("#dayTwoTemp");
-  dayTwoTemp.innerHTML = `${Math.round(response.data.daily[2].temp.day)}ºC`;
+  dayTwoTemp.innerHTML = `${Math.round(response.data.daily[2].temp.day)}`;
   let dayThreeTemp = document.querySelector("#dayThreeTemp");
-  dayThreeTemp.innerHTML = `${Math.round(response.data.daily[3].temp.day)}ºC`;
+  dayThreeTemp.innerHTML = `${Math.round(response.data.daily[3].temp.day)}`;
   let dayFourTemp = document.querySelector("#dayFourTemp");
-  dayFourTemp.innerHTML = `${Math.round(response.data.daily[4].temp.day)}ºC`;
+  dayFourTemp.innerHTML = `${Math.round(response.data.daily[4].temp.day)}`;
   let dayFiveTemp = document.querySelector("#dayFiveTemp");
-  dayFiveTemp.innerHTML = `${Math.round(response.data.daily[5].temp.day)}ºC`;
+  dayFiveTemp.innerHTML = `${Math.round(response.data.daily[5].temp.day)}`;
 
   let dayOneDay = now.getDay() + 1;
   if (dayOneDay > 6) {
@@ -235,23 +258,40 @@ function fiveDayForecast(response) {
   dayFiveIconImport.src = `${currentDayFiveIconUrl}`;
 }
 
-//celsius and farenheit temperature
-function celsiusTemp(event) {
-  event.preventDefault();
-  let mainTemp = document.querySelector("#main-temp");
-  let showCelsiusNumber = 16;
-  mainTemp.innerHTML = showCelsiusNumber;
-}
-
-let celsius = document.querySelector("#celsius");
-celsius.addEventListener("click", celsiusTemp);
-
 function farenheitTemp(event) {
   event.preventDefault();
-  let mainTemp = document.querySelector("#main-temp");
-  let showFarenheitNumber = 61;
-  mainTemp.innerHTML = showFarenheitNumber;
+  let celsiusLink = document.querySelector("#celsius");
+  let farenheitLink = document.querySelector("#farenheit");
+  if (celsiusLink.classList.contains("inactive")) {
+    farenheitLink.classList.add("inactive");
+    celsiusLink.classList.remove("inactive");
+  }
+  let allTemps = document.querySelectorAll(".celsius-farenheit");
+  allTemps.forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round((currentTemp * 9) / 5 + 32);
+  });
 }
 
-let farenheit = document.querySelector("#farenheit");
-farenheit.addEventListener("click", farenheitTemp);
+function celsiusTemp(event) {
+  event.preventDefault();
+  let celsiusLink = document.querySelector("#celsius");
+  let farenheitLink = document.querySelector("#farenheit");
+  if (farenheitLink.classList.contains("inactive")) {
+    farenheitLink.classList.remove("inactive");
+    celsiusLink.classList.add("inactive");
+  }
+  let allTemps = document.querySelectorAll(".celsius-farenheit");
+  allTemps.forEach(function (item) {
+    let currentTemp = item.innerHTML;
+    item.innerHTML = Math.round(((currentTemp - 32) * 5) / 9);
+  });
+}
+
+let windSpeed = document.querySelector(".metric-imperial");
+console.log(windSpeed);
+
+let farenheitLink = document.querySelector("#farenheit");
+farenheitLink.addEventListener("click", farenheitTemp);
+let celsiusLink = document.querySelector("#celsius");
+celsiusLink.addEventListener("click", celsiusTemp);
