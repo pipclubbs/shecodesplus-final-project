@@ -6,13 +6,13 @@ span {
 }
 
 h1 {
-  font-size: 50px;
+  font-size: 45px;
   margin-bottom: 0;
   text-align: center;
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 580;
   margin-bottom: 15px;
   text-align: right;
@@ -76,7 +76,7 @@ a:hover {
 }
 
 .five-day-forecast.col-12 {
-  bottom: -15px;
+  bottom: -26px;
   position: relative;
   text-align: right;
 }
@@ -106,16 +106,18 @@ a:hover {
 }
 
 .main-temperature {
-  font-size: 50px;
+  font-size: 45px;
   text-align: center;
-}
-
-.main-temperature.col-12 {
-  margin-bottom: 15px;
 }
 
 .reset-current li {
   display: inline;
+}
+
+.weather-description {
+  font-size: 15px;
+  margin: 0 0 15px 0;
+  text-align: center;
 }
 
 .weather-icon {

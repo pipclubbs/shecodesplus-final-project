@@ -26,8 +26,11 @@ currentDayTime.innerHTML = addDayTime(now);
 
 //current weather
 function currentWeather(response) {
+  console.log(response.data);
   let currentTemp = document.querySelector("#main-temp");
   currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
+  let currentDescription = document.querySelector("#weather-description");
+  currentDescription.innerHTML = `${response.data.weather[0].description}`;
   let currentFeelsLike = document.querySelector("#feels-like");
   currentFeelsLike.innerHTML = `${Math.round(response.data.main.feels_like)}`;
   let currentHighTemp = document.querySelector("#high-temp");
