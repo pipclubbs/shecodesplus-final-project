@@ -26,6 +26,11 @@ a:hover {
   text-decoration: none;
 }
 
+.weather-icon {
+  height: 50px;
+  width: 50px;
+}
+
 .reset-current li {
   display: inline;
 }
@@ -71,18 +76,6 @@ a:hover {
   font-weight: 400;
 }
 
-.fa-sun {
-  color: #fbc02d;
-}
-
-.main.fa-sun {
-  font-size: 50px;
-}
-
-.future.fa-sun {
-  font-size: 25px;
-}
-
 .form-control {
   margin-top: 20px;
 }
@@ -122,6 +115,7 @@ a:hover {
   line-height: 15px;
 }
 
-.conditions-text.card-body {
-  padding: 0 20 20 20;
+.five-day-forecast .card-body {
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
