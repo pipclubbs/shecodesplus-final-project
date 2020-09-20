@@ -28,34 +28,21 @@ let currentDayTime = document.querySelector("#current-day-and-time");
 
 currentDayTime.innerHTML = addDayTime(now);
 
-//current weather functions
+//current weather
 function currentWeather(response) {
-  let temperature = Math.round(response.data.main.temp);
   let currentTemp = document.querySelector("#main-temp");
-  currentTemp.innerHTML = `${temperature}`;
-
-  let feelsLike = Math.round(response.data.main.feels_like);
+  currentTemp.innerHTML = `${Math.round(response.data.main.temp)}`;
   let currentFeelsLike = document.querySelector("#feels-like");
-  currentFeelsLike.innerHTML = `${feelsLike}`;
-
-  let highTemp = Math.round(response.data.main.temp_max);
+  currentFeelsLike.innerHTML = `${Math.round(response.data.main.feels_like)}`;
   let currentHighTemp = document.querySelector("#high-temp");
-  currentHighTemp.innerHTML = `${highTemp}`;
-
-  let lowTemp = Math.round(response.data.main.temp_min);
+  currentHighTemp.innerHTML = `${Math.round(response.data.main.temp_max)}`;
   let currentLowTemp = document.querySelector("#low-temp");
-  currentLowTemp.innerHTML = `${lowTemp}`;
-
-  let humidity = response.data.main.humidity;
+  currentLowTemp.innerHTML = `${Math.round(response.data.main.temp_min)}`;
   let currentHumidity = document.querySelector("#humidity");
-  currentHumidity.innerHTML = `${humidity}%`;
-
-  let windSpeed = response.data.wind.speed;
+  currentHumidity.innerHTML = `${response.data.main.humidity}%`;
   let currentWindSpeed = document.querySelector("#wind-speed");
-  currentWindSpeed.innerHTML = `${windSpeed}m/s`;
-
-  let icon = response.data.weather[0].icon;
-  let currentIconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
+  currentWindSpeed.innerHTML = `${response.data.wind.speed}m/s`;
+  let currentIconUrl = `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`;
   let currentIcon = document.querySelector("#current-weather-icon");
   currentIcon.src = `${currentIconUrl}`;
 }
@@ -73,7 +60,6 @@ function cityInput(event) {
     units = "metric";
   }
   let currentPositionUrl = `${apiUrl}&q=${city.value}&appid=${apiKey}&units=${units}`;
-
   axios.get(currentPositionUrl).then(currentWeather);
   axios.get(currentPositionUrl).then(cityName);
   city.value = "";
@@ -82,12 +68,10 @@ function cityInput(event) {
 let searchCity = document.querySelector("#search-form");
 searchCity.addEventListener("submit", cityInput);
 
-//functionality for the current location link
+//current location link
 function cityName(response) {
-  let city = response.data.name;
   let searchedCity = document.querySelector("#searched-city");
-  searchedCity.innerHTML = city;
-
+  searchedCity.innerHTML = response.data.name;
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
@@ -99,7 +83,6 @@ function cityName(response) {
   }
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
   axios.get(fiveDayUrl).then(fiveDayForecast);
 }
 
@@ -117,7 +100,6 @@ function currentPosition(position) {
   let currentPositionUrl = `${apiUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
   axios.get(currentPositionUrl).then(currentWeather);
   axios.get(currentPositionUrl).then(cityName);
   axios.get(fiveDayUrl).then(fiveDayForecast);
@@ -131,12 +113,11 @@ function currentGeoLoc(event) {
 let currentLocLink = document.querySelector("#current-loc");
 currentLocLink.addEventListener("click", currentGeoLoc);
 
-//functionality for reset button
+//reset link
 function resetHome(event) {
   let city = "London";
   let displayCity = document.querySelector("#searched-city");
   displayCity.innerHTML = city;
-
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let farenheitLink = document.querySelector("#farenheit");
@@ -150,7 +131,6 @@ function resetHome(event) {
   let lon = -0.13;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
   axios.get(homeUrl).then(currentWeather);
   axios.get(fiveDayUrl).then(fiveDayForecast);
 }
@@ -163,7 +143,6 @@ function pageLoadLoc() {
   let city = "London";
   let displayCity = document.querySelector("#searched-city");
   displayCity.innerHTML = city;
-
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let farenheitLink = document.querySelector("#farenheit");
@@ -177,7 +156,6 @@ function pageLoadLoc() {
   let lon = -0.13;
   let apiFiveDayUrl = "https://api.openweathermap.org/data/2.5/onecall?";
   let fiveDayUrl = `${apiFiveDayUrl}lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
-
   axios.get(homeUrl).then(currentWeather);
   axios.get(fiveDayUrl).then(fiveDayForecast);
 }
@@ -221,39 +199,29 @@ function fiveDayForecast(response) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   let dayOneDayText = document.querySelector("#dayOneDay");
-  let dayOne = days[dayOneDay];
-  dayOneDayText.innerHTML = dayOne;
+  dayOneDayText.innerHTML = days[dayOneDay];
   let dayTwoDayText = document.querySelector("#dayTwoDay");
-  let dayTwo = days[dayTwoDay];
-  dayTwoDayText.innerHTML = dayTwo;
+  dayTwoDayText.innerHTML = days[dayTwoDay];
   let dayThreeDayText = document.querySelector("#dayThreeDay");
-  let dayThree = days[dayThreeDay];
-  dayThreeDayText.innerHTML = dayThree;
+  dayThreeDayText.innerHTML = days[dayThreeDay];
   let dayFourDayText = document.querySelector("#dayFourDay");
-  let dayFour = days[dayFourDay];
-  dayFourDayText.innerHTML = dayFour;
+  dayFourDayText.innerHTML = days[dayFourDay];
   let dayFiveDayText = document.querySelector("#dayFiveDay");
-  let dayFive = days[dayFiveDay];
-  dayFiveDayText.innerHTML = dayFive;
+  dayFiveDayText.innerHTML = days[dayFiveDay];
 
-  let dayOneIcon = response.data.daily[1].weather[0].icon;
-  let currentDayOneIconUrl = `http://openweathermap.org/img/wn/${dayOneIcon}@2x.png`;
+  let currentDayOneIconUrl = `http://openweathermap.org/img/wn/${response.data.daily[1].weather[0].icon}@2x.png`;
   let dayOneIconImport = document.querySelector("#dayOneIcon");
   dayOneIconImport.src = `${currentDayOneIconUrl}`;
-  let dayTwoIcon = response.data.daily[2].weather[0].icon;
-  let currentDayTwoIconUrl = `http://openweathermap.org/img/wn/${dayTwoIcon}@2x.png`;
+  let currentDayTwoIconUrl = `http://openweathermap.org/img/wn/${response.data.daily[2].weather[0].icon}@2x.png`;
   let dayTwoIconImport = document.querySelector("#dayTwoIcon");
   dayTwoIconImport.src = `${currentDayTwoIconUrl}`;
-  let dayThreeIcon = response.data.daily[3].weather[0].icon;
-  let currentDayThreeIconUrl = `http://openweathermap.org/img/wn/${dayThreeIcon}@2x.png`;
+  let currentDayThreeIconUrl = `http://openweathermap.org/img/wn/${response.data.daily[3].weather[0].icon}@2x.png`;
   let dayThreeIconImport = document.querySelector("#dayThreeIcon");
   dayThreeIconImport.src = `${currentDayThreeIconUrl}`;
-  let dayFourIcon = response.data.daily[4].weather[0].icon;
-  let currentDayFourIconUrl = `http://openweathermap.org/img/wn/${dayFourIcon}@2x.png`;
+  let currentDayFourIconUrl = `http://openweathermap.org/img/wn/${response.data.daily[4].weather[0].icon}@2x.png`;
   let dayFourIconImport = document.querySelector("#dayFourIcon");
   dayFourIconImport.src = `${currentDayFourIconUrl}`;
-  let dayFiveIcon = response.data.daily[5].weather[0].icon;
-  let currentDayFiveIconUrl = `http://openweathermap.org/img/wn/${dayFiveIcon}@2x.png`;
+  let currentDayFiveIconUrl = `http://openweathermap.org/img/wn/${response.data.daily[5].weather[0].icon}@2x.png`;
   let dayFiveIconImport = document.querySelector("#dayFiveIcon");
   dayFiveIconImport.src = `${currentDayFiveIconUrl}`;
 }

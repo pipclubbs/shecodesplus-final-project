@@ -47,7 +47,6 @@ a:hover {
 
 .celsiusFarenheit {
   font-size: 20px;
-  opacity: 75%;
   position: relative;
   bottom: 20px;
   right: 12px;
@@ -121,5 +120,4 @@ a:hover {
   width: 16px;
   position: relative;
   bottom: 2px;
-  opacity: 100%;
 }
