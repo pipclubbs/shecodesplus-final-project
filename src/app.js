@@ -3,12 +3,10 @@ function addDayTime(date) {
   if (now.getHours() < 10) {
     hours = `0${hours}`;
   }
-
   let minutes = now.getMinutes().toString();
   if (now.getMinutes() < 10) {
     minutes = `0${minutes}`;
   }
-
   let days = [
     "Sunday",
     "Monday",
@@ -19,13 +17,11 @@ function addDayTime(date) {
     "Saturday",
   ];
   let day = days[now.getDay()];
-
   return `${day}, ${hours}:${minutes}`;
 }
 
 let now = new Date();
 let currentDayTime = document.querySelector("#current-day-and-time");
-
 currentDayTime.innerHTML = addDayTime(now);
 
 //current weather
@@ -50,7 +46,6 @@ function currentWeather(response) {
 function cityInput(event) {
   event.preventDefault();
   let city = document.querySelector("#city-search");
-
   let apiKey = "b1864bb25c40d16f7c3d8c9b32fea220";
   let apiUrl = "https://api.openweathermap.org/data/2.5/weather?";
   let farenheitLink = document.querySelector("#farenheit");

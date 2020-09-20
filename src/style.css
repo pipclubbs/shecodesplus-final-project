@@ -1,21 +1,21 @@
 h1,
 h2,
 span {
-  font-family: "Oxygen", sans-serif;
   color: #1d2d50;
+  font-family: "Oxygen", sans-serif;
 }
 
 h1 {
   font-size: 50px;
-  text-align: center;
   margin-bottom: 0;
+  text-align: center;
 }
 
 h2 {
   font-size: 30px;
-  text-align: right;
-  margin-bottom: 15px;
   font-weight: 580;
+  margin-bottom: 15px;
+  text-align: right;
 }
 
 ul.reset-current {
@@ -27,56 +27,28 @@ a:hover {
   text-decoration: none;
 }
 
-.weather-icon {
-  height: 50px;
-  width: 50px;
+.card {
+  background: transparent;
+  border: none;
+  font-family: "oxygen", sans-serif;
+  line-height: 15px;
+  margin: 0;
 }
 
-.reset-current li {
-  display: inline;
+.celsiusFarenheit {
+  bottom: 20px;
+  font-size: 20px;
+  position: relative;
+  right: 12px;
 }
 
 .container {
   background-image: linear-gradient(to top, #5eaaa8 0%, #a3d2ca 100%);
-  max-width: 600px;
   border-radius: 15px;
-  margin-top: 30px;
   margin-bottom: 10px;
+  margin-top: 30px;
+  max-width: 600px;
   padding: 25px;
-}
-
-.celsiusFarenheit {
-  font-size: 20px;
-  position: relative;
-  bottom: 20px;
-  right: 12px;
-}
-
-.footer {
-  text-align: center;
-  opacity: 50%;
-  position: relative;
-  bottom: 40px;
-  margin: 0 0 20px 0;
-}
-.currentDayAndTime {
-  text-align: center;
-  margin-bottom: 0;
-  opacity: 30%;
-  font-weight: 400;
-}
-
-.form-control {
-  margin-top: 20px;
-}
-
-.main-temperature {
-  font-size: 50px;
-  text-align: center;
-}
-
-.main-temperature.col-12 {
-  margin-bottom: 15px;
 }
 
 .current-cond {
@@ -91,33 +63,62 @@ a:hover {
   margin-left: 0px;
 }
 
-.five-day-forecast.col-12 {
-  position: relative;
-  bottom: -15px;
-  text-align: right;
-}
-
-.card {
-  margin: 0;
-  background: transparent;
-  border: none;
-  font-family: "oxygen", sans-serif;
-  line-height: 15px;
+.currentDayAndTime {
+  font-weight: 400;
+  margin-bottom: 0;
+  opacity: 30%;
+  text-align: center;
 }
 
 .five-day-forecast .card-body {
-  padding-top: 5px;
   padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.five-day-forecast.col-12 {
+  bottom: -15px;
+  position: relative;
+  text-align: right;
+}
+
+.footer {
+  bottom: 40px;
+  font-weight: 200;
+  margin: 0 0 20px 0;
+  position: relative;
+  text-align: center;
+}
+
+.form-control {
+  margin-top: 20px;
 }
 
 .inactive {
-  pointer-events: none;
   color: #1d2d50;
+  pointer-events: none;
 }
 
 .linkedin {
-  height: 16px;
-  width: 16px;
-  position: relative;
   bottom: 2px;
+  height: 16px;
+  position: relative;
+  width: 16px;
+}
+
+.main-temperature {
+  font-size: 50px;
+  text-align: center;
+}
+
+.main-temperature.col-12 {
+  margin-bottom: 15px;
+}
+
+.reset-current li {
+  display: inline;
+}
+
+.weather-icon {
+  height: 50px;
+  width: 50px;
 }
