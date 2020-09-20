@@ -288,9 +288,6 @@ function celsiusTemp(event) {
   });
 }
 
-let windSpeed = document.querySelector(".metric-imperial");
-console.log(windSpeed);
-
 let farenheitLink = document.querySelector("#farenheit");
 farenheitLink.addEventListener("click", farenheitTemp);
 let celsiusLink = document.querySelector("#celsius");

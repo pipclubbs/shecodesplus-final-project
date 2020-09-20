@@ -53,14 +53,6 @@ a:hover {
   right: 12px;
 }
 
-.celsius {
-  color: grey;
-}
-
-.farenheit {
-  color: grey;
-}
-
 .footer {
   text-align: center;
   opacity: 50%;
@@ -102,7 +94,7 @@ a:hover {
 
 .five-day-forecast.col-12 {
   position: relative;
-  bottom: -22px;
+  bottom: -15px;
   text-align: right;
 }
 
@@ -122,4 +114,12 @@ a:hover {
 .inactive {
   pointer-events: none;
   color: #1d2d50;
+}
+
+.linkedin {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  bottom: 2px;
+  opacity: 100%;
 }
